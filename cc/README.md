@@ -11,4 +11,5 @@ Virtual Base classes -> Direct Base Classes -> nonstatic data member -> Construc
 
 ### CMake
 [Find Package](https://zhuanlan.zhihu.com/p/97369704)
-[Option Definition ConfigFile](https://coderefinery.github.io/cmake-workshop/environment/)
+
+[option, definition, configFile](https://coderefinery.github.io/cmake-workshop/environment/)
