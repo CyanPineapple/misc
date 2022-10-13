@@ -1,2 +1,2 @@
 # misc
-Some of my satisfactory scipts
+Some of my satisfactory scripts
