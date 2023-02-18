@@ -1,0 +1,7 @@
+(defn fibo [iter] (let [fibo_recur(fn [one two n]
+                   (if (= n iter)
+                      two
+                      (recur two (+ one two) (inc n))))]
+                   (fibo_recur 1 2 3)))
+
+(fibo 5)
