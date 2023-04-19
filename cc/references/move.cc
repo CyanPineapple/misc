@@ -44,28 +44,24 @@ int i = 0;
     }
 
     ~X() {
-        //std::cout << "X Destructing!" << std::endl;
+        std::cout << "X Destructing!" << std::endl;
     }
 
 };
 
 X boo() {
-    X x;
-    x.i = 1;
-    return x;
+    return X();
 }
 
 
 void Group0() {
     // Question 0  lifetime
-    //X x = boo();
+    X x = boo();
     //boo();
     // lifetime
     //X&& x = boo();
-    X&& x = std::move(boo());
+    //X&& x = std::move(boo());
     std::cout << "=======================" << std::endl;
-    std::cout << x.ptr << std::endl;
-    std::cout << *x.ptr << std::endl;
     //Y yy = x.y;
     //X y = x;
 }
@@ -157,7 +153,6 @@ void Group3() {
     std::cout << "===========3===========" << std::endl;
 
 }
-X&& 
 /*  Theory: rvalue reference? universal reference?
     Whether there's Deduct
  
@@ -199,26 +194,8 @@ void Group4() {
 }
 
 
-
-template <typename P>
-class Base {
- 
-
-func() > {
-    ! cast<P>(this)-> 
-}
-}
-
-class Derived : Base<Derived>{
-
-< 
-}
-
-
-Derived a  > ;
-
 int main() {
-    Group3();
+    Group0();
 
 }
 
