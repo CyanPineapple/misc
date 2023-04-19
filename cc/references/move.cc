@@ -12,9 +12,20 @@
        gl        r
 */
 
+class Y {
+    public:
+    Y() {
+    }
+    ~Y() {
+        std::cout << "Y destructor" << std::endl;
+    }
+};
 class X {
 public:
-    X() {}
+int* ptr;
+int i = 0;
+    X() {
+    }
     X(const X& rhs) {
         std::cout << "lvalue copy constructor" << std::endl;
     }
@@ -32,20 +43,47 @@ public:
         return *this;
     }
 
+    ~X() {
+        //std::cout << "X Destructing!" << std::endl;
+    }
+
 };
+
+X boo() {
+    X x;
+    x.i = 1;
+    return x;
+}
+
+
+void Group0() {
+    // Question 0  lifetime
+    //X x = boo();
+    //boo();
+    // lifetime
+    //X&& x = boo();
+    X&& x = std::move(boo());
+    std::cout << "=======================" << std::endl;
+    std::cout << x.ptr << std::endl;
+    std::cout << *x.ptr << std::endl;
+    //Y yy = x.y;
+    //X y = x;
+}
 
 X&& foo() {
     X x;
     return std::move(x);
 }
 
+
 void Group1() {
     // Question 1
     X&& x = foo();
     X x2 = x;
+
     std::cout << "=======================" << std::endl;
     // Question 2
-    X x1 = foo();
+    //X x1 = foo();
 }
 
 // Question 3
@@ -68,7 +106,7 @@ void Group2() {
 Recall that in pre-11 C++, it was not allowed to take a reference to a reference: 
 something like A& & would cause a compile error. 
 C++11, by contrast, introduces the following reference collapsing rules1:
-
+ 
     A& & becomes A&
     A& && becomes A&
     A&& & becomes A&
@@ -80,8 +118,12 @@ C++11, by contrast, introduces the following reference collapsing rules1:
 template<typename T>
 void foo(T&&);
 
-Here, the following apply:
+template <X>
+void foo(X&&)
 
+Here, the following apply:
+X x;
+foo(X&&)
     When foo is called on an lvalue of type A, then T resolves to A& 
     and hence, by the reference collapsing rules above, the argument type effectively becomes A&.
     When foo is called on an rvalue of type A, then T resolves to A, 
@@ -100,8 +142,10 @@ template<typename T, typename Arg>
 std::shared_ptr<T> factory2(Arg&& arg)
 { 
     std::cout << "@@@@@@@@@@@@@@@@@@@@@@@" << std::endl;
-    return std::make_shared<T>(T (polo_forward<Arg>(arg)));
+    return std::make_shared<T>(T (std::forward<Arg>(arg)));
 } 
+
+
 
 void Group3() {
     // Here we introduces perfect forwarding
@@ -113,7 +157,7 @@ void Group3() {
     std::cout << "===========3===========" << std::endl;
 
 }
-
+X&& 
 /*  Theory: rvalue reference? universal reference?
     Whether there's Deduct
  
@@ -126,20 +170,19 @@ void Group3() {
 X simple()
 {
     X x;
-// 简单返回对象；一般有 NRVO
     return x;
 }
 X simple_with_move()
 {
     X x;
-// move 会禁止 NRVO
+    // move prohibits NRVO
     return std::move(x);
 }
 X complicated(int n)
 {
     X x1;
     X x2;
-    // 有分支，一般无 NRVO
+    // branch disturbs NRVO
     if (n % 2 == 0) {
         return x1;
     } else {
@@ -157,6 +200,26 @@ void Group4() {
 
 
 
-int main() {
-    Group4();
+template <typename P>
+class Base {
+ 
+
+func() > {
+    ! cast<P>(this)-> 
 }
+}
+
+class Derived : Base<Derived>{
+
+< 
+}
+
+
+Derived a  > ;
+
+int main() {
+    Group3();
+
+}
+
+
